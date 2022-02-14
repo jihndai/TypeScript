@@ -1129,12 +1129,12 @@ interface ReadonlyArray<T> {
      * Combines two or more arrays.
      * @param items Additional items to add to the end of array1.
      */
-    concat(...items: ConcatArray<T>[]): T[];
+    concat<U>(...items: ConcatArray<NotNeverOrDefault<T,U>>[]): NotNeverOrDefault<T,U>[];
     /**
      * Combines two or more arrays.
      * @param items Additional items to add to the end of array1.
      */
-    concat(...items: (T | ConcatArray<T>)[]): T[];
+    concat<U>(...items: (NotArray<NotNeverOrDefault<T,U>> | ConcatArray<NotArray<NotNeverOrDefault<T,U>>>)[]): NotNeverOrDefault<T,U>[];
     /**
      * Adds all the elements of an array separated by the specified separator string.
      * @param separator A string used to separate one element of an array from the next in the resulting String. If omitted, the array elements are separated with a comma.
@@ -1274,13 +1274,13 @@ interface Array<T> {
      * This method returns a new array without modifying any existing arrays.
      * @param items Additional arrays and/or items to add to the end of the array.
      */
-    concat(...items: ConcatArray<T>[]): T[];
+    concat<U>(...items: ConcatArray<NotNeverOrDefault<T,U>>[]): NotNeverOrDefault<T,U>[];
     /**
      * Combines two or more arrays.
      * This method returns a new array without modifying any existing arrays.
      * @param items Additional arrays and/or items to add to the end of the array.
      */
-    concat(...items: (T | ConcatArray<T>)[]): T[];
+    concat<U>(...items: (NotArray<NotNeverOrDefault<T,U>> | ConcatArray<NotArray<NotNeverOrDefault<T,U>>>)[]): NotNeverOrDefault<T,U>[];
     /**
      * Adds all the elements of an array into a string, separated by the specified separator string.
      * @param separator A string used to separate one element of the array from the next in the resulting string. If omitted, the array elements are separated with a comma.
@@ -1599,6 +1599,16 @@ type Capitalize<S extends string> = intrinsic;
  * Convert first character of string literal type to lowercase
  */
 type Uncapitalize<S extends string> = intrinsic;
+
+/**
+ * Check if T isn't an array type
+ */
+type NotArray<T> = T extends unknown[] ? never : T;
+
+/**
+ * Use T if not never, otherwise use U
+ */
+type NotNeverOrDefault<T, U> = [T] extends [never] ? U : T;
 
 /**
  * Marker for contextual 'this' type
