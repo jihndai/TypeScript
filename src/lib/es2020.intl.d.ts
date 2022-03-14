@@ -63,7 +63,22 @@ declare namespace Intl {
      *
      * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#locales_argument).
      */
-    type LocalesArgument = UnicodeBCP47LocaleIdentifier | UnicodeBCP47LocaleIdentifier[] | Locale | Locale[] | undefined;
+    type LocalesArgument = UnicodeBCP47LocaleIdentifier | Locale | (UnicodeBCP47LocaleIdentifier | Locale)[] | undefined;
+
+    /**
+     * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames#parameters).
+     */
+    type DisplayNamesType = "language" | "region" | "script" | "calendar" | "dateTimeField" | "currency";
+
+    /**
+     * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames#parameters).
+     */
+    type DisplayNamesFallback = "code" | "none";
+
+    /**
+     * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames#parameters).
+     */
+    type DisplayNamesLanguageDisplay = "dialect" | "standard";
 
     /**
      * An object with some or all of properties of `options` parameter
@@ -292,11 +307,19 @@ declare namespace Intl {
     };
 
      interface DisplayNamesOptions {
+        localeMatcher?: RelativeTimeFormatLocaleMatcher;
+        style?: RelativeTimeFormatStyle;
+        type: DisplayNamesType;
+        fallback?: DisplayNamesFallback;
+        languageDisplay?: DisplayNamesLanguageDisplay;
+    }
+
+    interface DisplayNamesResolvedOptions {
         locale: UnicodeBCP47LocaleIdentifier;
-        localeMatcher: RelativeTimeFormatLocaleMatcher;
         style: RelativeTimeFormatStyle;
-        type: "language" | "region" | "script" | "currency";
-        fallback: "code" | "none";
+        type: DisplayNamesType;
+        fallback: DisplayNamesFallback;
+        languageDisplay?: DisplayNamesLanguageDisplay;
     }
 
     interface DisplayNames {
@@ -322,7 +345,7 @@ declare namespace Intl {
          *
          * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/resolvedOptions).
          */
-        resolvedOptions(): DisplayNamesOptions;
+        resolvedOptions(): DisplayNamesResolvedOptions;
     }
 
     /**
@@ -343,7 +366,7 @@ declare namespace Intl {
          *
          * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames).
          */
-        new(locales?: BCP47LanguageTag | BCP47LanguageTag[], options?: Partial<DisplayNamesOptions>): DisplayNames;
+        new(locales: LocalesArgument, options: DisplayNamesOptions): DisplayNames;
 
         /**
          * Returns an array containing those of the provided locales that are supported in display names without having to fall back to the runtime's default locale.
@@ -358,7 +381,7 @@ declare namespace Intl {
          *
          * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/supportedLocalesOf).
          */
-        supportedLocalesOf(locales: BCP47LanguageTag | BCP47LanguageTag[], options?: {localeMatcher: RelativeTimeFormatLocaleMatcher}): BCP47LanguageTag[];
+        supportedLocalesOf(locales?: LocalesArgument, options?: { localeMatcher?: RelativeTimeFormatLocaleMatcher }): BCP47LanguageTag[];
     };
 
 }
