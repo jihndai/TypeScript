@@ -23,6 +23,10 @@ const jaJP = new Intl.Locale("ja-JP");
 >Locale : new (tag: string | Intl.Locale, options?: Intl.LocaleOptions) => Intl.Locale
 >"ja-JP" : "ja-JP"
 
+const esES = "es-ES";
+>esES : "es-ES"
+>"es-ES" : "es-ES"
+
 const now = new Date();
 >now : Date
 >new Date() : Date
@@ -114,5 +118,16 @@ bigint.toLocaleString([deDE, jaJP]);
 >toLocaleString : (locales?: Intl.LocalesArgument, options?: BigIntToLocaleStringOptions) => string
 >[deDE, jaJP] : Intl.Locale[]
 >deDE : Intl.Locale
+>jaJP : Intl.Locale
+
+Intl.DisplayNames.supportedLocalesOf([esES, jaJP]);
+>Intl.DisplayNames.supportedLocalesOf([esES, jaJP]) : string[]
+>Intl.DisplayNames.supportedLocalesOf : (locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }) => string[]
+>Intl.DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>Intl : typeof Intl
+>DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>supportedLocalesOf : (locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }) => string[]
+>[esES, jaJP] : (string | Intl.Locale)[]
+>esES : "es-ES"
 >jaJP : Intl.Locale
 

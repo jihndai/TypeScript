@@ -125,12 +125,26 @@ console.log(regionNamesInTraditionalChinese.of('US'));
 
 // expected output: "美國"
 
+const resolvedOpts = regionNamesInEnglish.resolvedOptions();
+>resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))
+>regionNamesInEnglish.resolvedOptions : Symbol(Intl.DisplayNames.resolvedOptions, Decl(lib.es2020.intl.d.ts, --, --))
+>regionNamesInEnglish : Symbol(regionNamesInEnglish, Decl(es2020IntlAPIs.ts, 31, 5))
+>resolvedOptions : Symbol(Intl.DisplayNames.resolvedOptions, Decl(lib.es2020.intl.d.ts, --, --))
+
+resolvedOpts.languageDisplay;
+>resolvedOpts.languageDisplay : Symbol(Intl.DisplayNamesResolvedOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+>resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))
+>languageDisplay : Symbol(Intl.DisplayNamesResolvedOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+
+resolvedOpts.localeMatcher; // should error
+>resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))
+
 const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
->locales1 : Symbol(locales1, Decl(es2020IntlAPIs.ts, 40, 5))
+>locales1 : Symbol(locales1, Decl(es2020IntlAPIs.ts, 44, 5))
 
 const options1 = { localeMatcher: 'lookup' } as const;
->options1 : Symbol(options1, Decl(es2020IntlAPIs.ts, 41, 5))
->localeMatcher : Symbol(localeMatcher, Decl(es2020IntlAPIs.ts, 41, 18))
+>options1 : Symbol(options1, Decl(es2020IntlAPIs.ts, 45, 5))
+>localeMatcher : Symbol(localeMatcher, Decl(es2020IntlAPIs.ts, 45, 18))
 >const : Symbol(const)
 
 console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '));
@@ -143,8 +157,8 @@ console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '))
 >Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >supportedLocalesOf : Symbol(supportedLocalesOf, Decl(lib.es2020.intl.d.ts, --, --))
->locales1 : Symbol(locales1, Decl(es2020IntlAPIs.ts, 40, 5))
->options1 : Symbol(options1, Decl(es2020IntlAPIs.ts, 41, 5))
+>locales1 : Symbol(locales1, Decl(es2020IntlAPIs.ts, 44, 5))
+>options1 : Symbol(options1, Decl(es2020IntlAPIs.ts, 45, 5))
 >join : Symbol(Array.join, Decl(lib.es5.d.ts, --, --))
 
 new Intl.Locale(); // should error
@@ -159,4 +173,11 @@ new Intl.Locale(new Intl.Locale('en-US'));
 >Intl.Locale : Symbol(Intl.Locale, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >Locale : Symbol(Intl.Locale, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+
+new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
+>Intl.DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>type : Symbol(type, Decl(es2020IntlAPIs.ts, 51, 34))
+>locale : Symbol(locale, Decl(es2020IntlAPIs.ts, 51, 50))
 

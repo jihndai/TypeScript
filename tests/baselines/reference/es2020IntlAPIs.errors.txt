@@ -1,7 +1,10 @@
-tests/cases/conformance/es2020/es2020IntlAPIs.ts(45,1): error TS2554: Expected 1-2 arguments, but got 0.
+tests/cases/conformance/es2020/es2020IntlAPIs.ts(43,14): error TS2339: Property 'localeMatcher' does not exist on type 'DisplayNamesResolvedOptions'.
+tests/cases/conformance/es2020/es2020IntlAPIs.ts(49,1): error TS2554: Expected 1-2 arguments, but got 0.
+tests/cases/conformance/es2020/es2020IntlAPIs.ts(52,52): error TS2345: Argument of type '{ type: "region"; locale: string; }' is not assignable to parameter of type 'DisplayNamesOptions'.
+  Object literal may only specify known properties, and 'locale' does not exist in type 'DisplayNamesOptions'.
 
 
-==== tests/cases/conformance/es2020/es2020IntlAPIs.ts (1 errors) ====
+==== tests/cases/conformance/es2020/es2020IntlAPIs.ts (3 errors) ====
     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation
     const count = 26254.39;
     const date = new Date("2012-05-24");
@@ -42,6 +45,12 @@ tests/cases/conformance/es2020/es2020IntlAPIs.ts(45,1): error TS2554: Expected 1
     console.log(regionNamesInTraditionalChinese.of('US'));
     // expected output: "美國"
     
+    const resolvedOpts = regionNamesInEnglish.resolvedOptions();
+    resolvedOpts.languageDisplay;
+    resolvedOpts.localeMatcher; // should error
+                 ~~~~~~~~~~~~~
+!!! error TS2339: Property 'localeMatcher' does not exist on type 'DisplayNamesResolvedOptions'.
+    
     const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
     const options1 = { localeMatcher: 'lookup' } as const;
     console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '));
@@ -51,3 +60,9 @@ tests/cases/conformance/es2020/es2020IntlAPIs.ts(45,1): error TS2554: Expected 1
 !!! error TS2554: Expected 1-2 arguments, but got 0.
 !!! related TS6210 /.ts/lib.es2020.intl.d.ts:326:14: An argument for 'tag' was not provided.
     new Intl.Locale(new Intl.Locale('en-US'));
+    
+    new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
+                                                       ~~~~~~~~~~~~~~~
+!!! error TS2345: Argument of type '{ type: "region"; locale: string; }' is not assignable to parameter of type 'DisplayNamesOptions'.
+!!! error TS2345:   Object literal may only specify known properties, and 'locale' does not exist in type 'DisplayNamesOptions'.
+    
