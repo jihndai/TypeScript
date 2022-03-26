@@ -291,6 +291,10 @@ declare namespace Intl {
         new (tag: BCP47LanguageTag | Locale, options?: LocaleOptions): Locale;
     };
 
+    type DisplayNamesFallback =
+        | "code"
+        | "none";
+
     type DisplayNamesType =
         | "language"
         | "region"
@@ -298,10 +302,6 @@ declare namespace Intl {
         | "calendar"
         | "dateTimeField"
         | "currency";
-
-    type DisplayNamesFallback =
-        | "code"
-        | "none";
 
     type DisplayNamesLanguageDisplay =
         | "dialect"
