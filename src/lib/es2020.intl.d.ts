@@ -307,12 +307,12 @@ declare namespace Intl {
         | "dialect"
         | "standard";
 
-     interface DisplayNamesOptions {
+    interface DisplayNamesOptions {
         localeMatcher?: RelativeTimeFormatLocaleMatcher;
         style?: RelativeTimeFormatStyle;
         type: DisplayNamesType;
-        fallback?: DisplayNamesFallback;
         languageDisplay?: DisplayNamesLanguageDisplay;
+        fallback?: DisplayNamesFallback;
     }
 
     interface ResolvedDisplayNamesOptions {
