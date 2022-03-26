@@ -40,9 +40,15 @@ console.log(regionNamesInEnglish.of('US'));
 console.log(regionNamesInTraditionalChinese.of('US'));
 // expected output: "美國"
 
+const resolvedOpts = regionNamesInEnglish.resolvedOptions();
+resolvedOpts.languageDisplay;
+resolvedOpts.localeMatcher; // should error
+
 const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
 const options1 = { localeMatcher: 'lookup' } as const;
 console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '));
 
 new Intl.Locale(); // should error
 new Intl.Locale(new Intl.Locale('en-US'));
+
+new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error

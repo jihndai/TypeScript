@@ -39,12 +39,19 @@ console.log(regionNamesInEnglish.of('US'));
 console.log(regionNamesInTraditionalChinese.of('US'));
 // expected output: "美國"
 
+const resolvedOpts = regionNamesInEnglish.resolvedOptions();
+resolvedOpts.languageDisplay;
+resolvedOpts.localeMatcher; // should error
+
 const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
 const options1 = { localeMatcher: 'lookup' } as const;
 console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '));
 
 new Intl.Locale(); // should error
 new Intl.Locale(new Intl.Locale('en-US'));
+
+new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
+
 
 //// [es2020IntlAPIs.js]
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation
@@ -73,8 +80,12 @@ console.log(regionNamesInEnglish.of('US'));
 // expected output: "United States"
 console.log(regionNamesInTraditionalChinese.of('US'));
 // expected output: "美國"
+const resolvedOpts = regionNamesInEnglish.resolvedOptions();
+resolvedOpts.languageDisplay;
+resolvedOpts.localeMatcher; // should error
 const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
 const options1 = { localeMatcher: 'lookup' };
 console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '));
 new Intl.Locale(); // should error
 new Intl.Locale(new Intl.Locale('en-US'));
+new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error

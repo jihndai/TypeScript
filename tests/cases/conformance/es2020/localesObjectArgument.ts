@@ -3,6 +3,7 @@
 const enUS = new Intl.Locale("en-US");
 const deDE = new Intl.Locale("de-DE");
 const jaJP = new Intl.Locale("ja-JP");
+const esES = "es-ES";
 
 const now = new Date();
 const num = 1000;
@@ -20,3 +21,5 @@ num.toLocaleString([deDE, jaJP]);
 
 bigint.toLocaleString(enUS);
 bigint.toLocaleString([deDE, jaJP]);
+
+Intl.DisplayNames.supportedLocalesOf([esES, jaJP]);
