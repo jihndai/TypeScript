@@ -54,9 +54,14 @@ new Intl.DisplayNames(['en-US'], { type: 'region' });
 new Intl.DisplayNames(['en-US'], {}); // should error
 new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
 
-// Example from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/resolvedOptions
 const displayNames = new Intl.DisplayNames(['de-DE'], {type: 'region'});
 const usedOptions = displayNames.resolvedOptions();
+usedOptions.locale;
+usedOptions.style;
+usedOptions.type;
+usedOptions.fallback;
+usedOptions.languageDisplay;
+
 
 //// [es2020IntlAPIs.js]
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl#Locale_identification_and_negotiation
@@ -96,6 +101,10 @@ new Intl.Locale(new Intl.Locale('en-US'));
 new Intl.DisplayNames(['en-US'], { type: 'region' });
 new Intl.DisplayNames(['en-US'], {}); // should error
 new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
-// Example from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/resolvedOptions
 const displayNames = new Intl.DisplayNames(['de-DE'], { type: 'region' });
 const usedOptions = displayNames.resolvedOptions();
+usedOptions.locale;
+usedOptions.style;
+usedOptions.type;
+usedOptions.fallback;
+usedOptions.languageDisplay;

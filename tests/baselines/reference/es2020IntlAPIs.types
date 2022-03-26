@@ -274,7 +274,6 @@ new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should
 >locale : string
 >'en-US' : "en-US"
 
-// Example from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/resolvedOptions
 const displayNames = new Intl.DisplayNames(['de-DE'], {type: 'region'});
 >displayNames : Intl.DisplayNames
 >new Intl.DisplayNames(['de-DE'], {type: 'region'}) : Intl.DisplayNames
@@ -293,4 +292,29 @@ const usedOptions = displayNames.resolvedOptions();
 >displayNames.resolvedOptions : () => Intl.ResolvedDisplayNamesOptions
 >displayNames : Intl.DisplayNames
 >resolvedOptions : () => Intl.ResolvedDisplayNamesOptions
+
+usedOptions.locale;
+>usedOptions.locale : string
+>usedOptions : Intl.ResolvedDisplayNamesOptions
+>locale : string
+
+usedOptions.style;
+>usedOptions.style : Intl.RelativeTimeFormatStyle
+>usedOptions : Intl.ResolvedDisplayNamesOptions
+>style : Intl.RelativeTimeFormatStyle
+
+usedOptions.type;
+>usedOptions.type : Intl.DisplayNamesType
+>usedOptions : Intl.ResolvedDisplayNamesOptions
+>type : Intl.DisplayNamesType
+
+usedOptions.fallback;
+>usedOptions.fallback : Intl.DisplayNamesFallback
+>usedOptions : Intl.ResolvedDisplayNamesOptions
+>fallback : Intl.DisplayNamesFallback
+
+usedOptions.languageDisplay;
+>usedOptions.languageDisplay : Intl.DisplayNamesLanguageDisplay
+>usedOptions : Intl.ResolvedDisplayNamesOptions
+>languageDisplay : Intl.DisplayNamesLanguageDisplay
 
