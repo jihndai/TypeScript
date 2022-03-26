@@ -66,21 +66,6 @@ declare namespace Intl {
     type LocalesArgument = UnicodeBCP47LocaleIdentifier | Locale | (UnicodeBCP47LocaleIdentifier | Locale)[] | undefined;
 
     /**
-     * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames#parameters).
-     */
-    type DisplayNamesType = "language" | "region" | "script" | "calendar" | "dateTimeField" | "currency";
-
-    /**
-     * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames#parameters).
-     */
-    type DisplayNamesFallback = "code" | "none";
-
-    /**
-     * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/DisplayNames#parameters).
-     */
-    type DisplayNamesLanguageDisplay = "dialect" | "standard";
-
-    /**
      * An object with some or all of properties of `options` parameter
      * of `Intl.RelativeTimeFormat` constructor.
      *
@@ -306,6 +291,22 @@ declare namespace Intl {
         new (tag: BCP47LanguageTag | Locale, options?: LocaleOptions): Locale;
     };
 
+    type DisplayNamesType =
+        | "language"
+        | "region"
+        | "script"
+        | "calendar"
+        | "dateTimeField"
+        | "currency";
+
+    type DisplayNamesFallback =
+        | "code"
+        | "none";
+
+    type DisplayNamesLanguageDisplay =
+        | "dialect"
+        | "standard";
+
      interface DisplayNamesOptions {
         localeMatcher?: RelativeTimeFormatLocaleMatcher;
         style?: RelativeTimeFormatStyle;
@@ -314,7 +315,7 @@ declare namespace Intl {
         languageDisplay?: DisplayNamesLanguageDisplay;
     }
 
-    interface DisplayNamesResolvedOptions {
+    interface ResolvedDisplayNamesOptions {
         locale: UnicodeBCP47LocaleIdentifier;
         style: RelativeTimeFormatStyle;
         type: DisplayNamesType;
@@ -345,7 +346,7 @@ declare namespace Intl {
          *
          * [MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/resolvedOptions).
          */
-        resolvedOptions(): DisplayNamesResolvedOptions;
+        resolvedOptions(): ResolvedDisplayNamesOptions;
     }
 
     /**
