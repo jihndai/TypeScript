@@ -132,9 +132,9 @@ const resolvedOpts = regionNamesInEnglish.resolvedOptions();
 >resolvedOptions : Symbol(Intl.DisplayNames.resolvedOptions, Decl(lib.es2020.intl.d.ts, --, --))
 
 resolvedOpts.languageDisplay;
->resolvedOpts.languageDisplay : Symbol(Intl.DisplayNamesResolvedOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+>resolvedOpts.languageDisplay : Symbol(Intl.ResolvedDisplayNamesOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
 >resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))
->languageDisplay : Symbol(Intl.DisplayNamesResolvedOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+>languageDisplay : Symbol(Intl.ResolvedDisplayNamesOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
 
 resolvedOpts.localeMatcher; // should error
 >resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))
@@ -174,10 +174,59 @@ new Intl.Locale(new Intl.Locale('en-US'));
 >Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >Locale : Symbol(Intl.Locale, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 
-new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
+new Intl.DisplayNames(['en-US'], { type: 'region' });
 >Intl.DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
 >type : Symbol(type, Decl(es2020IntlAPIs.ts, 51, 34))
->locale : Symbol(locale, Decl(es2020IntlAPIs.ts, 51, 50))
+
+new Intl.DisplayNames(['en-US'], {}); // should error
+>Intl.DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+
+new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
+>Intl.DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>type : Symbol(type, Decl(es2020IntlAPIs.ts, 53, 34))
+>locale : Symbol(locale, Decl(es2020IntlAPIs.ts, 53, 50))
+
+const displayNames = new Intl.DisplayNames(['de-DE'], {type: 'region'});
+>displayNames : Symbol(displayNames, Decl(es2020IntlAPIs.ts, 55, 5))
+>Intl.DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>Intl : Symbol(Intl, Decl(lib.es5.d.ts, --, --), Decl(lib.es2017.intl.d.ts, --, --), Decl(lib.es2018.intl.d.ts, --, --), Decl(lib.es2020.bigint.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>DisplayNames : Symbol(Intl.DisplayNames, Decl(lib.es2020.intl.d.ts, --, --), Decl(lib.es2020.intl.d.ts, --, --))
+>type : Symbol(type, Decl(es2020IntlAPIs.ts, 55, 55))
+
+const usedOptions = displayNames.resolvedOptions();
+>usedOptions : Symbol(usedOptions, Decl(es2020IntlAPIs.ts, 56, 5))
+>displayNames.resolvedOptions : Symbol(Intl.DisplayNames.resolvedOptions, Decl(lib.es2020.intl.d.ts, --, --))
+>displayNames : Symbol(displayNames, Decl(es2020IntlAPIs.ts, 55, 5))
+>resolvedOptions : Symbol(Intl.DisplayNames.resolvedOptions, Decl(lib.es2020.intl.d.ts, --, --))
+
+usedOptions.locale;
+>usedOptions.locale : Symbol(Intl.ResolvedDisplayNamesOptions.locale, Decl(lib.es2020.intl.d.ts, --, --))
+>usedOptions : Symbol(usedOptions, Decl(es2020IntlAPIs.ts, 56, 5))
+>locale : Symbol(Intl.ResolvedDisplayNamesOptions.locale, Decl(lib.es2020.intl.d.ts, --, --))
+
+usedOptions.style;
+>usedOptions.style : Symbol(Intl.ResolvedDisplayNamesOptions.style, Decl(lib.es2020.intl.d.ts, --, --))
+>usedOptions : Symbol(usedOptions, Decl(es2020IntlAPIs.ts, 56, 5))
+>style : Symbol(Intl.ResolvedDisplayNamesOptions.style, Decl(lib.es2020.intl.d.ts, --, --))
+
+usedOptions.type;
+>usedOptions.type : Symbol(Intl.ResolvedDisplayNamesOptions.type, Decl(lib.es2020.intl.d.ts, --, --))
+>usedOptions : Symbol(usedOptions, Decl(es2020IntlAPIs.ts, 56, 5))
+>type : Symbol(Intl.ResolvedDisplayNamesOptions.type, Decl(lib.es2020.intl.d.ts, --, --))
+
+usedOptions.fallback;
+>usedOptions.fallback : Symbol(Intl.ResolvedDisplayNamesOptions.fallback, Decl(lib.es2020.intl.d.ts, --, --))
+>usedOptions : Symbol(usedOptions, Decl(es2020IntlAPIs.ts, 56, 5))
+>fallback : Symbol(Intl.ResolvedDisplayNamesOptions.fallback, Decl(lib.es2020.intl.d.ts, --, --))
+
+usedOptions.languageDisplay;
+>usedOptions.languageDisplay : Symbol(Intl.ResolvedDisplayNamesOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+>usedOptions : Symbol(usedOptions, Decl(es2020IntlAPIs.ts, 56, 5))
+>languageDisplay : Symbol(Intl.ResolvedDisplayNamesOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
 
