@@ -241,6 +241,26 @@ new Intl.Locale(new Intl.Locale('en-US'));
 >Locale : new (tag: string | Intl.Locale, options?: Intl.LocaleOptions) => Intl.Locale
 >'en-US' : "en-US"
 
+new Intl.DisplayNames(['en-US'], { type: 'region' });
+>new Intl.DisplayNames(['en-US'], { type: 'region' }) : Intl.DisplayNames
+>Intl.DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>Intl : typeof Intl
+>DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>['en-US'] : string[]
+>'en-US' : "en-US"
+>{ type: 'region' } : { type: "region"; }
+>type : "region"
+>'region' : "region"
+
+new Intl.DisplayNames(['en-US'], {}); // should error
+>new Intl.DisplayNames(['en-US'], {}) : Intl.DisplayNames
+>Intl.DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>Intl : typeof Intl
+>DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>['en-US'] : string[]
+>'en-US' : "en-US"
+>{} : {}
+
 new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
 >new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }) : Intl.DisplayNames
 >Intl.DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
@@ -253,4 +273,24 @@ new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should
 >'region' : "region"
 >locale : string
 >'en-US' : "en-US"
+
+// Example from https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/DisplayNames/resolvedOptions
+const displayNames = new Intl.DisplayNames(['de-DE'], {type: 'region'});
+>displayNames : Intl.DisplayNames
+>new Intl.DisplayNames(['de-DE'], {type: 'region'}) : Intl.DisplayNames
+>Intl.DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>Intl : typeof Intl
+>DisplayNames : { new (locales: Intl.LocalesArgument, options: Intl.DisplayNamesOptions): Intl.DisplayNames; prototype: Intl.DisplayNames; supportedLocalesOf(locales?: Intl.LocalesArgument, options?: { localeMatcher?: Intl.RelativeTimeFormatLocaleMatcher; }): string[]; }
+>['de-DE'] : string[]
+>'de-DE' : "de-DE"
+>{type: 'region'} : { type: "region"; }
+>type : "region"
+>'region' : "region"
+
+const usedOptions = displayNames.resolvedOptions();
+>usedOptions : Intl.ResolvedDisplayNamesOptions
+>displayNames.resolvedOptions() : Intl.ResolvedDisplayNamesOptions
+>displayNames.resolvedOptions : () => Intl.ResolvedDisplayNamesOptions
+>displayNames : Intl.DisplayNames
+>resolvedOptions : () => Intl.ResolvedDisplayNamesOptions
 

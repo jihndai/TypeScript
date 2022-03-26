@@ -51,4 +51,14 @@ console.log(Intl.DisplayNames.supportedLocalesOf(locales1, options1).join(', '))
 new Intl.Locale(); // should error
 new Intl.Locale(new Intl.Locale('en-US'));
 
+new Intl.DisplayNames(['en-US'], { type: 'region' });
+new Intl.DisplayNames(['en-US'], {}); // should error
 new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error
+
+const displayNames = new Intl.DisplayNames(['de-DE'], {type: 'region'});
+const usedOptions = displayNames.resolvedOptions();
+usedOptions.locale;
+usedOptions.style;
+usedOptions.type;
+usedOptions.fallback;
+usedOptions.languageDisplay;
