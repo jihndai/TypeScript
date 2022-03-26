@@ -1,4 +1,4 @@
-tests/cases/conformance/es2020/es2020IntlAPIs.ts(43,14): error TS2339: Property 'localeMatcher' does not exist on type 'DisplayNamesResolvedOptions'.
+tests/cases/conformance/es2020/es2020IntlAPIs.ts(43,14): error TS2339: Property 'localeMatcher' does not exist on type 'ResolvedDisplayNamesOptions'.
 tests/cases/conformance/es2020/es2020IntlAPIs.ts(49,1): error TS2554: Expected 1-2 arguments, but got 0.
 tests/cases/conformance/es2020/es2020IntlAPIs.ts(52,52): error TS2345: Argument of type '{ type: "region"; locale: string; }' is not assignable to parameter of type 'DisplayNamesOptions'.
   Object literal may only specify known properties, and 'locale' does not exist in type 'DisplayNamesOptions'.
@@ -49,7 +49,7 @@ tests/cases/conformance/es2020/es2020IntlAPIs.ts(52,52): error TS2345: Argument 
     resolvedOpts.languageDisplay;
     resolvedOpts.localeMatcher; // should error
                  ~~~~~~~~~~~~~
-!!! error TS2339: Property 'localeMatcher' does not exist on type 'DisplayNamesResolvedOptions'.
+!!! error TS2339: Property 'localeMatcher' does not exist on type 'ResolvedDisplayNamesOptions'.
     
     const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
     const options1 = { localeMatcher: 'lookup' } as const;
@@ -58,7 +58,7 @@ tests/cases/conformance/es2020/es2020IntlAPIs.ts(52,52): error TS2345: Argument 
     new Intl.Locale(); // should error
     ~~~~~~~~~~~~~~~~~
 !!! error TS2554: Expected 1-2 arguments, but got 0.
-!!! related TS6210 /.ts/lib.es2020.intl.d.ts:326:14: An argument for 'tag' was not provided.
+!!! related TS6210 /.ts/lib.es2020.intl.d.ts:311:14: An argument for 'tag' was not provided.
     new Intl.Locale(new Intl.Locale('en-US'));
     
     new Intl.DisplayNames(['en-US'], { type: 'region', locale: 'en-US' }); // should error

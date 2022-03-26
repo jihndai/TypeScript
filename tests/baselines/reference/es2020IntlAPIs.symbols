@@ -132,9 +132,9 @@ const resolvedOpts = regionNamesInEnglish.resolvedOptions();
 >resolvedOptions : Symbol(Intl.DisplayNames.resolvedOptions, Decl(lib.es2020.intl.d.ts, --, --))
 
 resolvedOpts.languageDisplay;
->resolvedOpts.languageDisplay : Symbol(Intl.DisplayNamesResolvedOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+>resolvedOpts.languageDisplay : Symbol(Intl.ResolvedDisplayNamesOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
 >resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))
->languageDisplay : Symbol(Intl.DisplayNamesResolvedOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
+>languageDisplay : Symbol(Intl.ResolvedDisplayNamesOptions.languageDisplay, Decl(lib.es2020.intl.d.ts, --, --))
 
 resolvedOpts.localeMatcher; // should error
 >resolvedOpts : Symbol(resolvedOpts, Decl(es2020IntlAPIs.ts, 40, 5))

@@ -176,20 +176,20 @@ console.log(regionNamesInTraditionalChinese.of('US'));
 // expected output: "美國"
 
 const resolvedOpts = regionNamesInEnglish.resolvedOptions();
->resolvedOpts : Intl.DisplayNamesResolvedOptions
->regionNamesInEnglish.resolvedOptions() : Intl.DisplayNamesResolvedOptions
->regionNamesInEnglish.resolvedOptions : () => Intl.DisplayNamesResolvedOptions
+>resolvedOpts : Intl.ResolvedDisplayNamesOptions
+>regionNamesInEnglish.resolvedOptions() : Intl.ResolvedDisplayNamesOptions
+>regionNamesInEnglish.resolvedOptions : () => Intl.ResolvedDisplayNamesOptions
 >regionNamesInEnglish : Intl.DisplayNames
->resolvedOptions : () => Intl.DisplayNamesResolvedOptions
+>resolvedOptions : () => Intl.ResolvedDisplayNamesOptions
 
 resolvedOpts.languageDisplay;
 >resolvedOpts.languageDisplay : Intl.DisplayNamesLanguageDisplay
->resolvedOpts : Intl.DisplayNamesResolvedOptions
+>resolvedOpts : Intl.ResolvedDisplayNamesOptions
 >languageDisplay : Intl.DisplayNamesLanguageDisplay
 
 resolvedOpts.localeMatcher; // should error
 >resolvedOpts.localeMatcher : any
->resolvedOpts : Intl.DisplayNamesResolvedOptions
+>resolvedOpts : Intl.ResolvedDisplayNamesOptions
 >localeMatcher : any
 
 const locales1 = ['ban', 'id-u-co-pinyin', 'de-ID'];
