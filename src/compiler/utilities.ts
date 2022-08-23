@@ -5594,12 +5594,12 @@ namespace ts {
         return symbol.exportSymbol ? symbol.exportSymbol.flags | symbol.flags : symbol.flags;
     }
 
-    export function isWriteOnlyAccess(node: Node) {
-        return accessKind(node) === AccessKind.Write;
+    export function isWriteOnlyAccess(node: Node, logical?: boolean) {
+        return accessKind(node, logical) === AccessKind.Write;
     }
 
-    export function isWriteAccess(node: Node) {
-        return accessKind(node) !== AccessKind.Read;
+    export function isWriteAccess(node: Node, logical?: boolean) {
+        return accessKind(node, logical) !== AccessKind.Read;
     }
 
     const enum AccessKind {
@@ -5610,7 +5610,7 @@ namespace ts {
         /** Writes to a variable and uses the result as an expression. E.g.: `f(x++);`. */
         ReadWrite
     }
-    function accessKind(node: Node): AccessKind {
+    function accessKind(node: Node, logical?: boolean): AccessKind {
         const { parent } = node;
         if (!parent) return AccessKind.Read;
 
@@ -5624,7 +5624,7 @@ namespace ts {
             case SyntaxKind.BinaryExpression:
                 const { left, operatorToken } = parent as BinaryExpression;
                 return left === node && isAssignmentOperator(operatorToken.kind) ?
-                    operatorToken.kind === SyntaxKind.EqualsToken ? AccessKind.Write : writeOrReadWrite()
+                    operatorToken.kind === SyntaxKind.EqualsToken ? AccessKind.Write : writeOrReadWrite(logical)
                     : AccessKind.Read;
             case SyntaxKind.PropertyAccessExpression:
                 return (parent as PropertyAccessExpression).name !== node ? AccessKind.Read : accessKind(parent);
@@ -5642,9 +5642,9 @@ namespace ts {
                 return AccessKind.Read;
         }
 
-        function writeOrReadWrite(): AccessKind {
+        function writeOrReadWrite(logical?: boolean): AccessKind {
             // If grandparent is not an ExpressionStatement, this is used as an expression in addition to having a side effect.
-            return parent.parent && walkUpParenthesizedExpressions(parent.parent).kind === SyntaxKind.ExpressionStatement ? AccessKind.Write : AccessKind.ReadWrite;
+            return !logical && parent.parent && walkUpParenthesizedExpressions(parent.parent).kind === SyntaxKind.ExpressionStatement ? AccessKind.Write : AccessKind.ReadWrite;
         }
     }
     function reverseAccessKind(a: AccessKind): AccessKind {
