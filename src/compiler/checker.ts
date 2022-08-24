@@ -29197,9 +29197,9 @@ namespace ts {
             return nonNullType;
         }
 
-        function checkPropertyAccessExpression(node: PropertyAccessExpression, checkMode: CheckMode | undefined, forceWritingOnly?: boolean) {
+        function checkPropertyAccessExpression(node: PropertyAccessExpression, checkMode: CheckMode | undefined, writeOnly?: boolean) {
             return node.flags & NodeFlags.OptionalChain ? checkPropertyAccessChain(node as PropertyAccessChain, checkMode) :
-                checkPropertyAccessExpressionOrQualifiedName(node, node.expression, checkNonNullExpression(node.expression), node.name, checkMode, forceWritingOnly);
+                checkPropertyAccessExpressionOrQualifiedName(node, node.expression, checkNonNullExpression(node.expression), node.name, checkMode, writeOnly);
         }
 
         function checkPropertyAccessChain(node: PropertyAccessChain, checkMode: CheckMode | undefined) {
@@ -29342,7 +29342,7 @@ namespace ts {
                 && getThisContainer(node, /*includeArrowFunctions*/ true) === getDeclaringConstructor(prop);
         }
 
-        function checkPropertyAccessExpressionOrQualifiedName(node: PropertyAccessExpression | QualifiedName, left: Expression | QualifiedName, leftType: Type, right: Identifier | PrivateIdentifier, checkMode: CheckMode | undefined, forceWritingOnly?: boolean) {
+        function checkPropertyAccessExpressionOrQualifiedName(node: PropertyAccessExpression | QualifiedName, left: Expression | QualifiedName, leftType: Type, right: Identifier | PrivateIdentifier, checkMode: CheckMode | undefined, writeOnly?: boolean) {
             const parentSymbol = getNodeLinks(left).resolvedSymbol;
             const assignmentKind = getAssignmentTargetKind(node);
             const apparentType = getApparentType(assignmentKind !== AssignmentKind.None || isMethodAccessForCall(node) ? getWidenedType(leftType) : leftType);
@@ -29450,14 +29450,13 @@ namespace ts {
                 checkPropertyNotUsedBeforeDeclaration(prop, node, right);
                 markPropertyAsReferenced(prop, node, isSelfTypeAccess(left, parentSymbol));
                 getNodeLinks(node).resolvedSymbol = prop;
-                const logical = true;
-                checkPropertyAccessibility(node, left.kind === SyntaxKind.SuperKeyword, isWriteAccess(node, logical), apparentType, prop);
+                checkPropertyAccessibility(node, left.kind === SyntaxKind.SuperKeyword, isWriteAccess(node, /*skipReadWriteCheck*/ true), apparentType, prop);
                 if (isAssignmentToReadonlyEntity(node as Expression, prop, assignmentKind)) {
                     error(right, Diagnostics.Cannot_assign_to_0_because_it_is_a_read_only_property, idText(right));
                     return errorType;
                 }
 
-                propType = isThisPropertyAccessInConstructor(node, prop) ? autoType : forceWritingOnly || isWriteOnlyAccess(node, logical) ? getWriteTypeOfSymbol(prop) : getTypeOfSymbol(prop);
+                propType = isThisPropertyAccessInConstructor(node, prop) ? autoType : writeOnly || isWriteOnlyAccess(node, /*skipReadWriteCheck*/ true) ? getWriteTypeOfSymbol(prop) : getTypeOfSymbol(prop);
             }
 
             return getFlowTypeOfAccessExpression(node, prop, propType, right, checkMode);
@@ -34520,12 +34519,9 @@ namespace ts {
                 }
 
                 function checkAssignmentOperatorWorker() {
-                    let assigningType: Type = leftType;
-                    if (isCompoundAssignment(operatorToken.kind)) {
-                        const localCheckMode = undefined;
-                        const localForceTuple = undefined;
-                        const localWriting = true;
-                        assigningType = checkExpression(left, localCheckMode, localForceTuple, localWriting);
+                    let assigneeType = leftType;
+                    if (isCompoundAssignment(operatorToken.kind as BinaryOperator) && left.kind === SyntaxKind.PropertyAccessExpression) {
+                        assigneeType = checkPropertyAccessExpression(left as PropertyAccessExpression, /*checkMode*/ undefined, /*writeOnly*/ true);
                     }
 
                     // TypeScript 1.0 spec (April 2014): 4.17
@@ -34548,13 +34544,8 @@ namespace ts {
                             }
                         }
                         // to avoid cascading errors check assignability only if 'isReference' check succeeded and no errors were reported
-                        checkTypeAssignableToAndOptionallyElaborate(valueType, assigningType, left, right, headMessage);
+                        checkTypeAssignableToAndOptionallyElaborate(valueType, assigneeType, left, right, headMessage);
                     }
-                }
-
-                function isCompoundAssignment(kind: SyntaxKind) {
-                    return kind >= SyntaxKind.FirstCompoundAssignment
-                        && kind <= SyntaxKind.LastCompoundAssignment;
                 }
             }
 
@@ -35159,12 +35150,12 @@ namespace ts {
             }
         }
 
-        function checkExpression(node: Expression | QualifiedName, checkMode?: CheckMode, forceTuple?: boolean, forceWritingOnly?: boolean): Type {
+        function checkExpression(node: Expression | QualifiedName, checkMode?: CheckMode, forceTuple?: boolean): Type {
             tracing?.push(tracing.Phase.Check, "checkExpression", { kind: node.kind, pos: node.pos, end: node.end, path: (node as TracingNode).tracingPath });
             const saveCurrentNode = currentNode;
             currentNode = node;
             instantiationCount = 0;
-            const uninstantiatedType = checkExpressionWorker(node, checkMode, forceTuple, forceWritingOnly);
+            const uninstantiatedType = checkExpressionWorker(node, checkMode, forceTuple);
             const type = instantiateTypeWithSingleGenericCallSignature(node, uninstantiatedType, checkMode);
             if (isConstEnumObjectType(type)) {
                 checkConstEnumAccess(node, type);
@@ -35207,7 +35198,7 @@ namespace ts {
             return checkExpression(node.expression, checkMode);
         }
 
-        function checkExpressionWorker(node: Expression | QualifiedName, checkMode: CheckMode | undefined, forceTuple?: boolean, forceWritingOnly?: boolean): Type {
+        function checkExpressionWorker(node: Expression | QualifiedName, checkMode: CheckMode | undefined, forceTuple?: boolean): Type {
             const kind = node.kind;
             if (cancellationToken) {
                 // Only bother checking on a few construct kinds.  We don't want to be excessively
@@ -35255,7 +35246,7 @@ namespace ts {
                 case SyntaxKind.ObjectLiteralExpression:
                     return checkObjectLiteral(node as ObjectLiteralExpression, checkMode);
                 case SyntaxKind.PropertyAccessExpression:
-                    return checkPropertyAccessExpression(node as PropertyAccessExpression, checkMode, forceWritingOnly);
+                    return checkPropertyAccessExpression(node as PropertyAccessExpression, checkMode);
                 case SyntaxKind.QualifiedName:
                     return checkQualifiedName(node as QualifiedName, checkMode);
                 case SyntaxKind.ElementAccessExpression:
