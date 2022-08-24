@@ -34520,6 +34520,8 @@ namespace ts {
 
                 function checkAssignmentOperatorWorker() {
                     let assigneeType = leftType;
+
+                    // getters can be a subtype of setters, so to check for assignability we use the setter's type instead
                     if (isCompoundAssignment(operatorToken.kind as BinaryOperator) && left.kind === SyntaxKind.PropertyAccessExpression) {
                         assigneeType = checkPropertyAccessExpression(left as PropertyAccessExpression, /*checkMode*/ undefined, /*writeOnly*/ true);
                     }
