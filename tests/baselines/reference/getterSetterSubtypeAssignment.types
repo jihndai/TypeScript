@@ -66,6 +66,38 @@ class NumberOrUndefined {
 >1 : 1
     }
 }
+const numberOrUndefined = new NumberOrUndefined();
+>numberOrUndefined : NumberOrUndefined
+>new NumberOrUndefined() : NumberOrUndefined
+>NumberOrUndefined : typeof NumberOrUndefined
+
+numberOrUndefined.x += 1;
+>numberOrUndefined.x += 1 : number
+>numberOrUndefined.x : number
+>numberOrUndefined : NumberOrUndefined
+>x : number
+>1 : 1
+
+numberOrUndefined.x -= 1;
+>numberOrUndefined.x -= 1 : number
+>numberOrUndefined.x : number
+>numberOrUndefined : NumberOrUndefined
+>x : number
+>1 : 1
+
+numberOrUndefined.x *= 1;
+>numberOrUndefined.x *= 1 : number
+>numberOrUndefined.x : number
+>numberOrUndefined : NumberOrUndefined
+>x : number
+>1 : 1
+
+numberOrUndefined.x /= 1;
+>numberOrUndefined.x /= 1 : number
+>numberOrUndefined.x : number
+>numberOrUndefined : NumberOrUndefined
+>x : number
+>1 : 1
 
 class NumberOrString {
 >NumberOrString : NumberOrString
@@ -155,6 +187,45 @@ class NumberOrString {
 >1 : 1
     }
 }
+const numberOrString = new NumberOrString();
+>numberOrString : NumberOrString
+>new NumberOrString() : NumberOrString
+>NumberOrString : typeof NumberOrString
+
+numberOrString.x += 1;
+>numberOrString.x += 1 : number
+>numberOrString.x : number
+>numberOrString : NumberOrString
+>x : number
+>1 : 1
+
+numberOrString.x += '1';
+>numberOrString.x += '1' : string
+>numberOrString.x : number
+>numberOrString : NumberOrString
+>x : number
+>'1' : "1"
+
+numberOrString.x -= 1;
+>numberOrString.x -= 1 : number
+>numberOrString.x : number
+>numberOrString : NumberOrString
+>x : number
+>1 : 1
+
+numberOrString.x *= 1;
+>numberOrString.x *= 1 : number
+>numberOrString.x : number
+>numberOrString : NumberOrString
+>x : number
+>1 : 1
+
+numberOrString.x /= 1;
+>numberOrString.x /= 1 : number
+>numberOrString.x : number
+>numberOrString : NumberOrString
+>x : number
+>1 : 1
 
 type Foo = { bar: number; };
 >Foo : { bar: number; }
@@ -238,4 +309,36 @@ class NumberOrObject {
 >1 : 1
     }
 }
+const numberOrObject = new NumberOrObject();
+>numberOrObject : NumberOrObject
+>new NumberOrObject() : NumberOrObject
+>NumberOrObject : typeof NumberOrObject
+
+numberOrObject.x += 1;
+>numberOrObject.x += 1 : number
+>numberOrObject.x : number
+>numberOrObject : NumberOrObject
+>x : number
+>1 : 1
+
+numberOrObject.x -= 1;
+>numberOrObject.x -= 1 : number
+>numberOrObject.x : number
+>numberOrObject : NumberOrObject
+>x : number
+>1 : 1
+
+numberOrObject.x *= 1;
+>numberOrObject.x *= 1 : number
+>numberOrObject.x : number
+>numberOrObject : NumberOrObject
+>x : number
+>1 : 1
+
+numberOrObject.x /= 1;
+>numberOrObject.x /= 1 : number
+>numberOrObject.x : number
+>numberOrObject : NumberOrObject
+>x : number
+>1 : 1
 

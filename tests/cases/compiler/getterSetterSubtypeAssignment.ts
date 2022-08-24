@@ -23,6 +23,11 @@ class NumberOrUndefined {
         this.x /= 1;
     }
 }
+const numberOrUndefined = new NumberOrUndefined();
+numberOrUndefined.x += 1;
+numberOrUndefined.x -= 1;
+numberOrUndefined.x *= 1;
+numberOrUndefined.x /= 1;
 
 class NumberOrString {
     _x: number | string = 0;
@@ -48,6 +53,12 @@ class NumberOrString {
         this.x /= 1;
     }
 }
+const numberOrString = new NumberOrString();
+numberOrString.x += 1;
+numberOrString.x += '1';
+numberOrString.x -= 1;
+numberOrString.x *= 1;
+numberOrString.x /= 1;
 
 type Foo = { bar: number; };
 class NumberOrObject {
@@ -71,3 +82,8 @@ class NumberOrObject {
         this.x /= 1;
     }
 }
+const numberOrObject = new NumberOrObject();
+numberOrObject.x += 1;
+numberOrObject.x -= 1;
+numberOrObject.x *= 1;
+numberOrObject.x /= 1;
