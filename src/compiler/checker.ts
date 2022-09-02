@@ -29450,13 +29450,13 @@ namespace ts {
                 checkPropertyNotUsedBeforeDeclaration(prop, node, right);
                 markPropertyAsReferenced(prop, node, isSelfTypeAccess(left, parentSymbol));
                 getNodeLinks(node).resolvedSymbol = prop;
-                checkPropertyAccessibility(node, left.kind === SyntaxKind.SuperKeyword, isWriteAccess(node, /*skipReadWriteCheck*/ true), apparentType, prop);
+                checkPropertyAccessibility(node, left.kind === SyntaxKind.SuperKeyword, isWriteAccess(node), apparentType, prop);
                 if (isAssignmentToReadonlyEntity(node as Expression, prop, assignmentKind)) {
                     error(right, Diagnostics.Cannot_assign_to_0_because_it_is_a_read_only_property, idText(right));
                     return errorType;
                 }
 
-                propType = isThisPropertyAccessInConstructor(node, prop) ? autoType : writeOnly || isWriteOnlyAccess(node, /*skipReadWriteCheck*/ true) ? getWriteTypeOfSymbol(prop) : getTypeOfSymbol(prop);
+                propType = isThisPropertyAccessInConstructor(node, prop) ? autoType : writeOnly || isWriteOnlyAccess(node) ? getWriteTypeOfSymbol(prop) : getTypeOfSymbol(prop);
             }
 
             return getFlowTypeOfAccessExpression(node, prop, propType, right, checkMode);
