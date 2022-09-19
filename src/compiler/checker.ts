@@ -23429,7 +23429,7 @@ namespace ts {
                         SymbolFlags.Value | SymbolFlags.ExportValue,
                         getCannotFindNameDiagnosticForName(node),
                         node,
-                        !isWriteOnlyAccess(node),
+                        isReadOnlyAccess(node),
                         /*excludeGlobals*/ false) || unknownSymbol;
             }
             return links.resolvedSymbol;
@@ -29862,7 +29862,7 @@ namespace ts {
             if (!hasPrivateModifier && !hasPrivateIdentifier) {
                 return;
             }
-            if (nodeForCheckWriteOnly && isWriteOnlyAccess(nodeForCheckWriteOnly) && !(prop.flags & SymbolFlags.SetAccessor)) {
+            if (nodeForCheckWriteOnly && !isReadOnlyAccess(nodeForCheckWriteOnly) && !(prop.flags & SymbolFlags.SetAccessor)) {
                 return;
             }
             if (isSelfTypeAccess) {

@@ -5594,6 +5594,10 @@ namespace ts {
         return symbol.exportSymbol ? symbol.exportSymbol.flags | symbol.flags : symbol.flags;
     }
 
+    export function isReadOnlyAccess(node: Node) {
+        return accessKind(node) === AccessKind.Read;
+    }
+
     export function isWriteOnlyAccess(node: Node) {
         return accessKind(node) === AccessKind.Write;
     }
@@ -5620,11 +5624,11 @@ namespace ts {
             case SyntaxKind.PostfixUnaryExpression:
             case SyntaxKind.PrefixUnaryExpression:
                 const { operator } = parent as PrefixUnaryExpression | PostfixUnaryExpression;
-                return operator === SyntaxKind.PlusPlusToken || operator === SyntaxKind.MinusMinusToken ? writeOrReadWrite() : AccessKind.Read;
+                return operator === SyntaxKind.PlusPlusToken || operator === SyntaxKind.MinusMinusToken ? AccessKind.ReadWrite : AccessKind.Read;
             case SyntaxKind.BinaryExpression:
                 const { left, operatorToken } = parent as BinaryExpression;
                 return left === node && isAssignmentOperator(operatorToken.kind) ?
-                    operatorToken.kind === SyntaxKind.EqualsToken ? AccessKind.Write : writeOrReadWrite()
+                    operatorToken.kind === SyntaxKind.EqualsToken ? AccessKind.Write : AccessKind.ReadWrite
                     : AccessKind.Read;
             case SyntaxKind.PropertyAccessExpression:
                 return (parent as PropertyAccessExpression).name !== node ? AccessKind.Read : accessKind(parent);
@@ -5640,11 +5644,6 @@ namespace ts {
                 return accessKind(parent);
             default:
                 return AccessKind.Read;
-        }
-
-        function writeOrReadWrite(): AccessKind {
-            // If grandparent is not an ExpressionStatement, this is used as an expression in addition to having a side effect.
-            return parent.parent && walkUpParenthesizedExpressions(parent.parent).kind === SyntaxKind.ExpressionStatement ? AccessKind.Write : AccessKind.ReadWrite;
         }
     }
     function reverseAccessKind(a: AccessKind): AccessKind {
